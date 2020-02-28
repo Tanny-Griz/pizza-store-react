@@ -1,7 +1,7 @@
 import React from 'react';
-import './style.scss';
+// import './style.scss';
 
-const PizzaCard = ({ pizza, handleAddCart }) => {
+const PizzaCart = ({ pizza }) => {
     return (
         <>
             <div className="holder-pizza">
@@ -15,8 +15,7 @@ const PizzaCard = ({ pizza, handleAddCart }) => {
                         <p>{pizza.price}</p>
                         <p></p>
                         <div className="btn-group">
-                            <button onClick={() => handleAddCart(pizza.name, pizza.id,pizza.price, 'cart')}>add cart</button>
-                        {/* <button className="edit" onClick={() => handleSetId(user.id, 'edit')}>Edit</button> */}
+                            <button>delete</button>
                         </div>
                     </div>
                 </div>
@@ -25,4 +24,4 @@ const PizzaCard = ({ pizza, handleAddCart }) => {
     )
 }
 
-export default PizzaCard
+export default PizzaCart

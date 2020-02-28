@@ -5,4 +5,5 @@ let pizzasFromLS = JSON.parse(localStorage.getItem('pizzas'));
 
 export const initialState = {
     pizzas: pizzasFromLS || pizzaList,
+    cart: []
 }

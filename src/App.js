@@ -19,7 +19,7 @@ const App = () => {
       <Context.Provider value={{state, dispatch}}>
         <Header />
         <Switch>
-          <Route path="/" render={() => <PizzaContainer data={state} />} />
+          <Route exact path="/" render={() => <PizzaContainer data={state} />} />
           <Route path="/cart" render={() => <Cart />} />
         </Switch>
       </Context.Provider>

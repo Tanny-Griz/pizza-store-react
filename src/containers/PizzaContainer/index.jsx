@@ -4,8 +4,6 @@ import PizzaCard from '../../components/PizzaCard';
 import Search from '../../components/Search';
 import { Context } from '../../App';
 import { useContext } from 'react';
-import { useReducer } from 'react';
-import { useStateHook } from '../../stateHook';
 
 
 const PizzaContainer = ({data}) => {
@@ -28,16 +26,17 @@ const PizzaContainer = ({data}) => {
     }
 
     const handleAddCart = (name, id, price) => {
-        let count = 0;
-        const cart = {
+        let cartArr = context.state.cart;
+        const pizzaObj = {
             name: name,
             id: id,
             price: price,
-            count: count+1
+            count: 1
         }
-        console.log(cart)
+        cartArr.push(pizzaObj);
+        localStorage.setItem('pizzasInCart', JSON.stringify(cartArr));
+        console.log(cartArr);
     }
-
 
     return (
         <>
