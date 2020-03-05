@@ -1,4 +1,5 @@
 import React from 'react';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import './style.scss';
 import Button from '../Button';
 import Search from '../Search';
@@ -7,14 +8,16 @@ import {Link} from "react-router-dom";
 const Header = () => {
     return (
         <header>
-            <div className="holder-header">
+            <div className="container">
+               <div className="holder-header">
                <h1><Link to="/">Pizza store</Link></h1>
-                <Button><Link to="/cart">Cart</Link></Button>
+                <Button>
+                    <ShoppingCartIcon><Link to="/cart">Cart</Link>
+                    </ShoppingCartIcon>
+                </Button>
+            </div>
             </div>
             
-            <div className="holder-button">
-                
-            </div>
         </header>
     )
 }

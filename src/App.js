@@ -1,28 +1,30 @@
-import React, { Provider, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router-dom';
 import Cart from './containers/Cart';
 import PizzaContainer from './containers/PizzaContainer';
-import { useStateHook } from './stateHook';
+import { pizzaList } from './data/listOfPizzasAndCompozitions';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
-export const Context = React.createContext();
+
 
 const App = () => {
-  
-  const [state, dispatch] = useStateHook();
 
-  useEffect(() => console.log(state));
+  useEffect(() => {
+    store.dispatch({ type: 'INIT', payload: pizzaList })
+  }, [])
 
   return (
     <>
-      <Context.Provider value={{state, dispatch}}>
+      <Provider store={store}>
         <Header />
         <Switch>
-          <Route exact path="/" render={() => <PizzaContainer data={state} />} />
-          <Route path="/cart" render={() => <Cart />} />
+          <Route exact path="/" component={PizzaContainer} />
+          <Route path="/cart" component={Cart} />
         </Switch>
-      </Context.Provider>
+      </Provider>
     </>
   );
 }

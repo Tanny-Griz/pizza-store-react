@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const pizzaList = [{
     id: 1,
     img: "1.png",
