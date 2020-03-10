@@ -20,8 +20,8 @@ const PizzaContainer = () => {
         e.target.value
             ? setfiltredPizzas(pizzas.filter(pizza => {
                 return pizza.name.toLowerCase().includes(e.target.value),
-                pizza.composition.join(' ').toLowerCase().includes(e.target.value);
-                
+                    pizza.composition.join(' ').toLowerCase().includes(e.target.value);
+
             }))
             : setfiltredPizzas([...pizzas]);
     }
@@ -38,59 +38,62 @@ const PizzaContainer = () => {
             : setfiltredPizzas([...newSort])
     }
 
+    // const cartArray = [];
 
     // const handleAddCart = (name, id, price) => {
-    //     let cartArr = context.state.cart;
     //     const pizzaObj = {
     //         name: name,
     //         id: id,
     //         price: price,
     //         count: 1
     //     }
-    //     cartArr.push(pizzaObj);
-    //     localStorage.setItem('pizzasInCart', JSON.stringify(cartArr));
-    //     // console.log(cartArr);
+    //     cartArray.push(pizzaObj);
+    //     localStorage.setItem('pizzasInCart', JSON.stringify(cartArray));
+    //     console.log(pizzaObj);
+    //     console.log(cartArray);
     // }
 
     return (
         <>
-            <section className="filters">
-                <div className="container">
-                    <div className="filters-group">
-                        <Search 
-                            onChange={handleSearchPizzas} 
-                            placeholder="Название или ингредиент" 
+            <main>
+                <section className="filters">
+                    <div className="container">
+                        <div className="filters-group">
+                            <Search
+                                onChange={handleSearchPizzas}
+                                placeholder="Название или ингредиент"
                             >
-                        </Search>
-                        <div className="select-price">
-                            <Select
-                                onChange={(e) => handleSortByPrice(e)}
-                                children
+                            </Search>
+                            <div className="select-price">
+                                <Select
+                                    onChange={(e) => handleSortByPrice(e)}
+                                    children
                                 >
-                                <option>Фильтр</option>
-                                <option>Цена: по возростанию</option>
-                                <option>Цена: по убыванию</option>
-                                <option>Калории: по возростанию</option>
-                                <option>Калории: по убыванию</option>
-                            </Select>
+                                    <option>Фильтр</option>
+                                    <option>Цена: по возростанию</option>
+                                    <option>Цена: по убыванию</option>
+                                    <option>Калории: по возростанию</option>
+                                    <option>Калории: по убыванию</option>
+                                </Select>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section className="content">
-                <div className="container">
-                    <div className="holder-cards">
-                        {filtredPizzas.map(pizza => {
-                            return <PizzaCard
-                                pizza={pizza}
-                                key={pizza.name + pizza.id}
-                            // handleAddCart={handleAddCart}
-                            />
-                        })}
+                <section className="content">
+                    <div className="container">
+                        <div className="holder-cards">
+                            {filtredPizzas.map(pizza => {
+                                return <PizzaCard
+                                    pizza={pizza}
+                                    key={pizza.name + pizza.id}
+                                />
+                            })}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </main>
+
 
         </>
     )

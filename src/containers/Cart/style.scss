@@ -1,0 +1,27 @@
+.holder-cart {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -15px;
+    @media screen and (min-width: 480px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+    }
+
+    .holder-pizza {
+        padding: 0 15px;
+    }
+
+    .pizza-card {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+    }
+
+}
+
+.b {
+        height: 50px;
+        line-height: 50px;
+
+}
