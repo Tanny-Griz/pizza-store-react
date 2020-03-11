@@ -1,42 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './style.scss';
 import PizzaCart from '../../components/PizzaCart';
 
 
 const Cart = () => {
-
     const pizzasFromLS = JSON.parse(localStorage.getItem('pizzasInCart'));
-
     const pizzas = [...pizzasFromLS];
-    console.log(pizzas)
 
-    // // const ids = 
-    // const pizzasCart = pizzas.reduce((tally, pizza) => {
-    //     let id = pizza.id
-    //     tally[id] = (tally[id] || 0) + 1
-    //     return tally;
-    // }, {})
-    // console.log(pizzasCart)
+    const pizzasBye = pizzas.filter(p => p.count > 0)
 
+    let count = 0;
+    let sum = 0;
+    pizzasBye.forEach(p => {
+        count += p.count;
+        sum += +p.price;
+        console.log(sum)
+    })
 
-    let totalCount = 0;
-    let totalPrice = 0;
-    pizzas.forEach(p => {
-        // totalCount += p.count
-        totalPrice += p.price
-    } );
-    console.log(totalPrice)
-
+    const [countInCart, setCountInCart] = useState(count);
+    const [sumInCart, setSumInCart] = useState(sum);
 
 
     return (
         <main>
             <section>
                 <div className="container">
-                    <h2>Cart</h2> <button className="b">button</button>
+                    {/* <div className="out">
+                        <p>Корзина: {countInCart} товаров на сумму <span> {sumInCart} грн.</span></p>
+                    </div> */}
                     <div className="holder-cart">
-                        {pizzasFromLS.map(pizza => {
+                        {pizzasBye.map(pizza => {
                             return <PizzaCart
+                                countInCart={countInCart}
+                                setCountInCart={setCountInCart}
+                                setSumInCart={setSumInCart}
                                 pizza={pizza}
                                 key={pizza.name + pizza.id}
                             />
@@ -44,10 +41,7 @@ const Cart = () => {
                     </div>
                 </div>
             </section>
-
         </main>
-
-
     )
 }
 

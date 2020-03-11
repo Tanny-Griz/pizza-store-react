@@ -8,6 +8,28 @@ const PizzaCard = ({ pizza }) => {
 
     const pizzas = useSelector(state => state.pizzas);
 
+    const cartObj = pizzas.map(item => {
+        return {
+            id: item.id,
+            img: item.img,
+            name: item.name,
+            price: item.price,
+            count: 0,
+        }
+    });
+
+    const handleAddCart = pizza => {
+
+        const arrParse = JSON.parse(localStorage.getItem('pizzasInCart'));
+        const newArr = arrParse || cartObj;
+        
+        const {id: pizzaId} = pizza;
+        const pizzaModel = newArr.find(item => item.id === pizzaId);
+        pizzaModel.count += 1;
+        console.log(newArr);
+        localStorage.setItem('pizzasInCart', JSON.stringify(newArr))
+    }
+
     const cartArr = [...pizzas].map(pizza => {
         return {
             id: pizza.id,
@@ -19,28 +41,28 @@ const PizzaCard = ({ pizza }) => {
         }
     })
 
-    const handleAddCart = (name, id, price) => {
+    // const handleAddCart = (name, id, price) => {
 
-        const arrParse = JSON.parse(localStorage.getItem('pizzasInCart'));
-        const newArr = arrParse || [];
+    //     const arrParse = JSON.parse(localStorage.getItem('pizzasInCart'));
+    //     const newArr = arrParse || [];
 
-        const pizzaModel = pizzas.find(p => p.id === id);
+    //     const pizzaModel = pizzas.find(p => p.id === id);
 
-        for (let pizza of cartArr) {
-            if (pizza.id === id) {
-                pizza.price = pizzaModel.price;
-                pizza.count += 1;
+    //     for (let pizza of cartArr) {
+    //         if (pizza.id === id) {
+    //             pizza.price = pizzaModel.price;
+    //             pizza.count += 1;
 
-                pizza.totalPrice += pizzaModel.price;
-                newArr.push(pizza);
-                localStorage.setItem('pizzasInCart', JSON.stringify(newArr))
-                console.log(newArr);
+    //             pizza.totalPrice += pizzaModel.price;
+    //             newArr.push(pizza);
+    //             localStorage.setItem('pizzasInCart', JSON.stringify(newArr))
+    //             console.log(newArr);
 
-                break;
-            }
-        }
+    //             break;
+    //         }
+    //     }
 
-    }
+    // }
 
     let url = "../../img/";
 
@@ -59,7 +81,7 @@ const PizzaCard = ({ pizza }) => {
 
                         <p></p>
                         <div className="btn-group">
-                            <Button variant="contained" color="primary" onClick={() => handleAddCart(pizza.name, pizza.id, pizza.price, 'cart')}>Заказать
+                            <Button variant="contained" color="primary" onClick={() => handleAddCart(pizza)}>Заказать
                             </Button>
                         </div>
                     </div>
@@ -68,5 +90,4 @@ const PizzaCard = ({ pizza }) => {
         </>
     )
 }
-
 export default PizzaCard
