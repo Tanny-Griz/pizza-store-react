@@ -54,6 +54,18 @@ export const pizzas = (state=initialState, action) => {
             newState.cart.totalPrice += action.payload.price;
             setItem('cart', newState);
             return newState
+        case 'COUNT_ASC':
+            const newState1 = {...state};
+            newState1.cart.pizzasInCart = newState1.cart.pizzasInCart.map(item => {
+                if (action.payload.id === item.id) {
+                    return {id: item.id, count: item.count + action.payload.e, name: item.name, img: item.img, price: item.price, }
+                }
+                return item;
+            })
+            newState1.cart.totalCount++;
+            // newState1.cart.totalPrice += action.payload.price;
+            setItem('cart', newState1);
+            return newState1
         default: 
             return state;
     }

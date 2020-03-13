@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.scss';
 import Button from '@material-ui/core/Button';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const PizzaCard = ({ pizza }) => {
     const dispatch = useDispatch();

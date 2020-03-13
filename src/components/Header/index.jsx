@@ -3,14 +3,17 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import './style.scss';
 import Button from '../Button';
 import {Link} from "react-router-dom";
-import { store } from '../../store';
 import { useSelector } from 'react-redux';
-import { pizzas } from '../../store/pizzas/reducer';
 
 const Header = () => {
 
     const totalCount = useSelector(state => state.pizzas.cart.totalCount)
-    console.log(totalCount);
+
+    // const objFromLSCart = getItem('cart');
+    // let totalCount = 0;
+    // if (objFromLSCart) {
+    //     totalCount = objFromLSCart.cart.totalCount;
+    // }
 
     return (
         <header>
