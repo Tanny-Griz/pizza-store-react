@@ -1,39 +1,37 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './style.scss';
 import PizzaCart from '../../components/PizzaCart';
+import { useSelector } from 'react-redux';
+import { getItem } from '../../services/storageService';
 
 
 const Cart = () => {
-    const pizzasFromLS = JSON.parse(localStorage.getItem('pizzasInCart'));
-    const pizzas = [...pizzasFromLS];
 
-    const pizzasBye = pizzas.filter(p => p.count > 0)
-
-    let count = 0;
-    let sum = 0;
-    pizzasBye.forEach(p => {
-        count += p.count;
-        sum += +p.price;
-        console.log(sum)
-    })
-
-    const [countInCart, setCountInCart] = useState(count);
-    const [sumInCart, setSumInCart] = useState(sum);
+    const objFromLSCart = getItem('cart');
+    const arrayFromLSCart = objFromLSCart.cart.pizzasInCart;
+    let arrayOfPizzaCart = [];
+    let totalCount = 0;
+    let totalPrice = 0;
+    for (let p of arrayFromLSCart) {
+        if (p.count > 0) {
+            arrayOfPizzaCart.push(p);
+            totalCount += p.count;
+            totalPrice += p.price;
+        }
+    }
+    console.log(arrayOfPizzaCart);
 
 
     return (
         <main>
             <section>
                 <div className="container">
-                    {/* <div className="out">
-                        <p>Корзина: {countInCart} товаров на сумму <span> {sumInCart} грн.</span></p>
-                    </div> */}
+                    <div className="out">
+                        <p>Корзина: {totalCount} товаров на сумму <span> {totalPrice} грн.</span></p>
+                    </div>
                     <div className="holder-cart">
-                        {pizzasBye.map(pizza => {
+                        {arrayOfPizzaCart.map(pizza => {
                             return <PizzaCart
-                                countInCart={countInCart}
-                                setCountInCart={setCountInCart}
-                                setSumInCart={setSumInCart}
                                 pizza={pizza}
                                 key={pizza.name + pizza.id}
                             />

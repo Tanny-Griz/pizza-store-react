@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const PizzaContainer = () => {
 
-    const pizzas = useSelector(state => state.pizzas);
+    const pizzas = useSelector(state => state.pizzas.pizzas);
 
     const [filtredPizzas, setfiltredPizzas] = useState([]);
 
@@ -37,21 +37,6 @@ const PizzaContainer = () => {
             ? setfiltredPizzas([...pizzas])
             : setfiltredPizzas([...newSort])
     }
-
-    // const cartArray = [];
-
-    // const handleAddCart = (name, id, price) => {
-    //     const pizzaObj = {
-    //         name: name,
-    //         id: id,
-    //         price: price,
-    //         count: 1
-    //     }
-    //     cartArray.push(pizzaObj);
-    //     localStorage.setItem('pizzasInCart', JSON.stringify(cartArray));
-    //     console.log(pizzaObj);
-    //     console.log(cartArray);
-    // }
 
     return (
         <>
